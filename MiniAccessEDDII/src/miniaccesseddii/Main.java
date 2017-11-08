@@ -6,6 +6,7 @@
 package miniaccesseddii;
 
 
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 
@@ -54,6 +55,27 @@ public class Main extends javax.swing.JFrame {
             principal_table.setModel(model_principal);
             JOptionPane.showMessageDialog(this, "Se han guardado los campos.");
             jMenuItemNuevo.setEnabled(false);
+        }
+    }
+    
+    private void openFile(){
+        JFileChooser jfc = new JFileChooser();
+        int selection = jfc.showOpenDialog(this);
+        if (selection == JFileChooser.APPROVE_OPTION) {
+            util.setFile(jfc.getSelectedFile());
+            util.loadFile();
+            JOptionPane.showMessageDialog(this, "Se ha cargado el archivo " + 
+                    util.getFile().getName() + ".");
+        }
+    }
+    
+    private void saveFile(){
+        JFileChooser jfc = new JFileChooser();
+        int selection = jfc.showSaveDialog(this);
+        if (selection == JFileChooser.APPROVE_OPTION) {
+            util.setFile(jfc.getSelectedFile());
+            util.saveFile();
+            JOptionPane.showMessageDialog(this, "Se ha guardado.");
         }
     }
 
@@ -234,6 +256,11 @@ public class Main extends javax.swing.JFrame {
 
         jMenuItemGuardar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItemGuardar.setText("Guardar");
+        jMenuItemGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemGuardarActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItemGuardar);
 
         jMenuItemSalir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
@@ -316,7 +343,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenuItemAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAbrirActionPerformed
-        // TODO add your handling code here:
+        openFile();
     }//GEN-LAST:event_jMenuItemAbrirActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -331,6 +358,10 @@ public class Main extends javax.swing.JFrame {
     private void jMenuItemSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSalirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jMenuItemSalirActionPerformed
+
+    private void jMenuItemGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGuardarActionPerformed
+        saveFile();
+    }//GEN-LAST:event_jMenuItemGuardarActionPerformed
 
     /**
      * @param args the command line arguments
