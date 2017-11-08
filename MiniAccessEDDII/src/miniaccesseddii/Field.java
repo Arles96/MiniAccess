@@ -21,6 +21,7 @@ public class Field implements Serializable {
     private String type;
 
     //Constructors
+    
     public Field(boolean key, String name, String content, String type) {
         this.key = key;
         this.name = name;
@@ -34,9 +35,9 @@ public class Field implements Serializable {
         this.type = type;
     }
 
-    public Field(String name, String content) {
+    public Field(String name, String type) {
         this.name = name;
-        this.content = content;
+        this.type = type;
     }
 
     //Getter and setter

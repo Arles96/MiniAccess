@@ -5,7 +5,11 @@
  */
 package miniaccesseddii;
 
+
+import javax.swing.JOptionPane;
+
 import java.util.ArrayList;
+
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -14,11 +18,29 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Main extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Main
-     */
+    
+    //Atributes
+    
+    private Util util = new Util();
+    
     public Main() {
         initComponents();
+        util.addRegister(new Register());
+    }
+    
+    //Eventos 
+    
+    private void newField(){
+        String name, type;
+        name = NombreDelCampoTf.getText();
+        if (name.equals("")) {
+            JOptionPane.showMessageDialog(this, "Error el campo esta vacio.");
+        }else {
+            type =(String) NuevoTipoCb.getSelectedItem();
+            Field field = new Field(name, type);
+            util.getRegister(0).addField(field);
+            JOptionPane.showMessageDialog(this, "Se ha guardado el el campo.");
+        }
     }
 
     /**
@@ -179,6 +201,11 @@ public class Main extends javax.swing.JFrame {
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setText("Abrir");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
@@ -252,11 +279,16 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        newField();
         DefaultTableModel modelo = (DefaultTableModel) NuevoTa.getModel();
         Object[] b = {NombreDelCampoTf.getText(), NuevoTipoCb.getSelectedItem()};
         modelo.addRow(b);
         NuevoTa.setModel(modelo);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -286,10 +318,8 @@ public class Main extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Main().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Main().setVisible(true);
         });
     }
 
