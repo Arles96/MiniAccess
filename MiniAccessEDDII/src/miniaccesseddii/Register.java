@@ -12,23 +12,20 @@ import java.util.ArrayList;
  * @author Arles Cerrato
  */
 public class Register {
-    
+
     //Atributes
-    
     private ArrayList<Field> fields = new ArrayList();
     private Field field;
 
     //Constructors
-    
     public Register(Field field) {
         this.field = field;
     }
 
     public Register() {
     }
-    
-    //Getter and Setter
 
+    //Getter and Setter
     public ArrayList<Field> getFields() {
         return fields;
     }
@@ -44,16 +41,14 @@ public class Register {
     public void setField(Field field) {
         this.field = field;
     }
-    
+
     //Administration methods
-    
-    public void addField(Field field){
+    public void addField(Field field) {
         fields.add(field);
-    }  
-    
-    public void removeField(int i){
+    }
+
+    public void removeField(int i) {
         fields.remove(i);
     }
-    
-    
+
 }

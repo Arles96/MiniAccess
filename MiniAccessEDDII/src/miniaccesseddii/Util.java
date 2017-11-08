@@ -10,22 +10,19 @@ package miniaccesseddii;
  * @author Arles Cerrato
  */
 public class Util {
-    
-    //Atributes
-    
-    private Register register;
-    
-    //Constructors
 
+    //Atributes
+    private Register register;
+
+    //Constructors
     public Util() {
     }
 
     public Util(Register register) {
         this.register = register;
     }
-    
-    //Getter and setter
 
+    //Getter and setter
     public Register getRegister() {
         return register;
     }
@@ -33,23 +30,22 @@ public class Util {
     public void setRegister(Register register) {
         this.register = register;
     }
-    
+
     //Administration methods
-    
-    public void exportExcel(){
-        
+    public void exportExcel() {
+
     }
-    
-    public void exportXml(){
-        
+
+    public void exportXml() {
+
     }
-    
-    public void saveFile(){
-        
+
+    public void saveFile() {
+
     }
-    
-    public void openFile(){
-        
+
+    public void openFile() {
+
     }
-    
+
 }

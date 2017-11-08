@@ -12,16 +12,14 @@ import java.util.Objects;
  * @author Arles Cerrato
  */
 public class Field {
-    
+
     //Atributes
-    
     private boolean key;
     private String name;
     private String content;
     private String type;
-    
-    //Constructors
 
+    //Constructors
     public Field(boolean key, String name, String content, String type) {
         this.key = key;
         this.name = name;
@@ -39,9 +37,8 @@ public class Field {
         this.name = name;
         this.content = content;
     }
-    
-    //Getter and setter
 
+    //Getter and setter
     public boolean isKey() {
         return key;
     }
@@ -73,9 +70,8 @@ public class Field {
     public void setType(String type) {
         this.type = type;
     }
-    
-    //Administration Methods
 
+    //Administration Methods
     @Override
     public int hashCode() {
         int hash = 7;
@@ -111,5 +107,5 @@ public class Field {
     public String toString() {
         return "Field{" + "key=" + key + ", name=" + name + ", content=" + content + ", type=" + type + '}';
     }
-       
+
 }
