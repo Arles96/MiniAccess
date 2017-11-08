@@ -5,13 +5,14 @@
  */
 package miniaccesseddii;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  *
  * @author Arles Cerrato
  */
-public class Field {
+public class Field implements Serializable {
 
     //Atributes
     private boolean key;
