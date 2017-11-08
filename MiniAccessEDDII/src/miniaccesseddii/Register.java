@@ -5,26 +5,29 @@
  */
 package miniaccesseddii;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author Arles Cerrato
  */
-public class Register {
+public class Register implements Serializable{
     
     //Atributes
     
-    private ArrayList<Field> fields = new ArrayList();
+    private ArrayList<Field> fields;
     private Field field;
 
     //Constructors
     
     public Register(Field field) {
+        this.fields = new ArrayList();
         this.field = field;
     }
 
     public Register() {
+        this.fields = new ArrayList();
     }
     
     //Getter and Setter
