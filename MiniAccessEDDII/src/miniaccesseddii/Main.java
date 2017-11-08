@@ -5,7 +5,8 @@
  */
 package miniaccesseddii;
 
-import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,11 +14,33 @@ import java.util.ArrayList;
  */
 public class Main extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Main
-     */
+    
+    //Atributes
+    
+    private Util util = new Util();
+    private DefaultTableModel table_nuevo = new DefaultTableModel();
+    
     public Main() {
         initComponents();
+        util.addRegister(new Register());
+        table_nuevo = (DefaultTableModel) NuevoTb.getModel();
+    }
+    
+    //Eventos 
+    
+    private void newField(){
+        String name, type;
+        name = NombreDelCampoTf.getText();
+        if (name.equals("")) {
+            JOptionPane.showMessageDialog(this, "Error el campo esta vacio.");
+        }else {
+            type =(String) NuevoTipoCb.getSelectedItem();
+            Field field = new Field(name, type);
+            util.getRegister(0).addField(field);
+            Object rowData [] = {name , type};
+            table_nuevo.addRow(rowData);
+            JOptionPane.showMessageDialog(this, "Se ha guardado el el campo.");
+        }
     }
 
     /**
@@ -63,6 +86,11 @@ public class Main extends javax.swing.JFrame {
         jLabel1.setText("Nombre del campo");
 
         jButton1.setText("Agregar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Aceptar");
 
@@ -245,6 +273,10 @@ public class Main extends javax.swing.JFrame {
         Nuevo.pack();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        newField();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -273,10 +305,8 @@ public class Main extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Main().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Main().setVisible(true);
         });
     }
 

@@ -20,10 +20,12 @@ import java.util.ArrayList;
 public class Util {
 
     //Atributes
+    
     private ArrayList<Register> registers;
     private File file;
 
     //Constructors
+    
     public Util() {
         registers = new ArrayList();
     }
@@ -61,6 +63,11 @@ public class Util {
     }
 
     //Administration methods
+    
+    public Register getRegister(int i){
+        return registers.get(i);
+    }
+    
     public void exportExcel() {
 
     }
