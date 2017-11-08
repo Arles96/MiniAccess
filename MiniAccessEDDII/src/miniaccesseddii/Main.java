@@ -6,6 +6,7 @@
 package miniaccesseddii;
 
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -29,7 +30,6 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
         Nuevo = new javax.swing.JDialog();
         jLabel1 = new javax.swing.JLabel();
         NombreDelCampoTf = new javax.swing.JTextField();
@@ -41,12 +41,12 @@ public class Main extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         NuevoTipoCb = new javax.swing.JComboBox<>();
         jScrollPane3 = new javax.swing.JScrollPane();
-        NuevoTb = new javax.swing.JTable();
+        NuevoTa = new javax.swing.JTable();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jToggleButton2 = new javax.swing.JToggleButton();
-        jToggleButton3 = new javax.swing.JToggleButton();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -63,6 +63,11 @@ public class Main extends javax.swing.JFrame {
         jLabel1.setText("Nombre del campo");
 
         jButton1.setText("Agregar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Aceptar");
 
@@ -76,7 +81,7 @@ public class Main extends javax.swing.JFrame {
 
         NuevoTipoCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Int", "Float", "Char", "String" }));
 
-        NuevoTb.setModel(new javax.swing.table.DefaultTableModel(
+        NuevoTa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -84,7 +89,7 @@ public class Main extends javax.swing.JFrame {
                 "Valor", "Tipo"
             }
         ));
-        jScrollPane3.setViewportView(NuevoTb);
+        jScrollPane3.setViewportView(NuevoTa);
 
         javax.swing.GroupLayout NuevoLayout = new javax.swing.GroupLayout(Nuevo.getContentPane());
         Nuevo.getContentPane().setLayout(NuevoLayout);
@@ -155,17 +160,15 @@ public class Main extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        buttonGroup1.add(jToggleButton1);
-        jToggleButton1.setText("Agregar");
+        jButton6.setText("Agregar registro");
 
-        buttonGroup1.add(jToggleButton2);
-        jToggleButton2.setText("Modificar");
+        jButton7.setText("Eliminar selección");
 
-        buttonGroup1.add(jToggleButton3);
-        jToggleButton3.setText("Eliminar");
+        jButton8.setText("Editar selección");
 
         jMenu1.setText("Archivo");
 
+        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem5.setText("Nuevo");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -174,12 +177,15 @@ public class Main extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem5);
 
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setText("Abrir");
         jMenu1.add(jMenuItem1);
 
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem2.setText("Guardar");
         jMenu1.add(jMenuItem2);
 
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
         jMenuItem3.setText("Salir");
         jMenu1.add(jMenuItem3);
 
@@ -214,9 +220,9 @@ public class Main extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jToggleButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-                    .addComponent(jToggleButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -227,11 +233,11 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jToggleButton1)
+                        .addComponent(jButton6)
                         .addGap(18, 18, 18)
-                        .addComponent(jToggleButton2)
+                        .addComponent(jButton7)
                         .addGap(18, 18, 18)
-                        .addComponent(jToggleButton3)
+                        .addComponent(jButton8)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE))
                 .addContainerGap())
@@ -244,6 +250,13 @@ public class Main extends javax.swing.JFrame {
         Nuevo.setVisible(true);
         Nuevo.pack();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        DefaultTableModel modelo = (DefaultTableModel) NuevoTa.getModel();
+        Object[] b={NombreDelCampoTf.getText(),NuevoTipoCb.getSelectedItem()};
+        modelo.addRow(b);
+        NuevoTa.setModel(modelo);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -283,14 +296,16 @@ public class Main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField NombreDelCampoTf;
     private javax.swing.JDialog Nuevo;
-    private javax.swing.JTable NuevoTb;
+    private javax.swing.JTable NuevoTa;
     private javax.swing.JComboBox<String> NuevoTipoCb;
-    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
@@ -308,9 +323,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton2;
-    private javax.swing.JToggleButton jToggleButton3;
     // End of variables declaration//GEN-END:variables
-    
+
 }
