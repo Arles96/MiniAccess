@@ -253,7 +253,7 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         DefaultTableModel modelo = (DefaultTableModel) NuevoTa.getModel();
-        Object[] b={NombreDelCampoTf.getText(),NuevoTipoCb.getSelectedItem()};
+        Object[] b = {NombreDelCampoTf.getText(), NuevoTipoCb.getSelectedItem()};
         modelo.addRow(b);
         NuevoTa.setModel(modelo);
     }//GEN-LAST:event_jButton1ActionPerformed
