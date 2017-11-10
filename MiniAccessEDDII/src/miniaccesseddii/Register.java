@@ -40,4 +40,17 @@ public class Register implements Serializable {
         fields.remove(i);
     }
 
+    @Override
+    public String toString() {
+        String txt = "";
+        
+        for (Field field : fields) {
+            txt += "|" + field.getContent().trim();
+        }
+        
+        txt = ((char)txt.length()) + txt;
+        
+        return txt;
+    }
+
 }

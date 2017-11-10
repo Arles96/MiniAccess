@@ -9,9 +9,14 @@ import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.RandomAccessFile;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -120,4 +125,33 @@ public class Util {
 
     }
 
+    public void saveFileTxt() {
+        if (file != null) {
+            try {
+                FileWriter fw = new FileWriter(file);
+                for (int i = 0; i < registers.size(); i++) {
+                    fw.append(registers.get(i).toString());
+                }
+                
+                fw.flush();
+                fw.close();
+            } catch (IOException e) {
+                System.out.println("Hubo un error en la escritura.");
+            }
+        }
+    }
+
+    public void loadFileTxt() {
+        FileReader fr;
+        RandomAccessFile raf;
+        registers = new ArrayList();
+        try {
+            fr = new FileReader(file);
+            raf = new RandomAccessFile(file, "r");
+            
+            
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error al abrir el archivo.");
+        }
+    }
 }
