@@ -28,6 +28,8 @@ public class Util {
     
     private ArrayList<Register> registers;
     private File file;
+    private int bufferSize;
+    private int selectedLine;
 
     //Constructors
     
@@ -126,15 +128,13 @@ public class Util {
     }
 
     public void saveFileTxt() {
-        if (file != null) {
+        if (file != null || !file.exists()) {
             try {
-                FileWriter fw = new FileWriter(file);
+                RandomAccessFile raf = new RandomAccessFile(file, "w");
+                raf.
                 for (int i = 0; i < registers.size(); i++) {
-                    fw.append(registers.get(i).toString());
+                    
                 }
-                
-                fw.flush();
-                fw.close();
             } catch (IOException e) {
                 System.out.println("Hubo un error en la escritura.");
             }
