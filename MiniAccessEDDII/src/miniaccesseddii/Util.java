@@ -9,8 +9,6 @@ import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -28,6 +26,7 @@ public class Util {
     
     private ArrayList<Register> registers;
     private File file;
+    private Register model;
     private int bufferSize;
     private int selectedLine;
 
@@ -69,6 +68,38 @@ public class Util {
         this.file = new File(path);
     }
 
+    public ArrayList<Register> getRegisters() {
+        return registers;
+    }
+
+    public void setRegisters(ArrayList<Register> registers) {
+        this.registers = registers;
+    }
+
+    public Register getModel() {
+        return model;
+    }
+
+    public void setModel(Register model) {
+        this.model = model;
+    }
+
+    public int getBufferSize() {
+        return bufferSize;
+    }
+
+    public void setBufferSize(int bufferSize) {
+        this.bufferSize = bufferSize;
+    }
+
+    public int getSelectedLine() {
+        return selectedLine;
+    }
+
+    public void setSelectedLine(int selectedLine) {
+        this.selectedLine = selectedLine;
+    }
+   
     //Administration methods
     
     public Register getRegister(int i){

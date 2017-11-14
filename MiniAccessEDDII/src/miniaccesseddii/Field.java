@@ -19,6 +19,8 @@ public class Field implements Serializable {
     private String name;
     private String content;
     private String type;
+    private int size;
+    public final int MAXIMUM = 255;
 
     //Constructors
     
@@ -35,7 +37,13 @@ public class Field implements Serializable {
         this.type = type;
     }
 
-    public Field(String name, String type) {
+    public Field(String name, String type, int size) {
+        this.name = name;
+        this.type = type;
+        this.size = size;
+    }
+    
+    public Field(String name, String type){
         this.name = name;
         this.type = type;
     }
@@ -71,6 +79,14 @@ public class Field implements Serializable {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
     }
 
     //Administration Methods
