@@ -128,13 +128,62 @@ public class Util {
     }
 
     public void saveFileTxt() {
-        if (file != null || !file.exists()) {
+        if (file != null || !file.exists() || !registers.isEmpty()) {
             try {
                 RandomAccessFile raf = new RandomAccessFile(file, "w");
-                raf.
-                for (int i = 0; i < registers.size(); i++) {
-                    
+                //Writing metadata
+                
+                String metadata = "";
+                for (int i = 0; i < registers.get(0).getFields().size(); i++) {
+                    Field  f = registers.get(0).getFields().get(i);
+                    metadata += f.getName();
+                    switch(f.getType().toLowerCase()){
+                        case "int":{
+                            metadata += "1";
+                            break;
+                        }
+                        
+                        case "string":{
+                            metadata += "2";
+                            break;
+                        }
+                        
+                        case "double":{
+                            metadata += "3";
+                            break;
+                        }
+                        
+                        case "float":{
+                            metadata += "4";
+                            break;
+                        }
+                        
+                        case "byte":{
+                            metadata += "5";
+                            break;
+                        }
+                        
+                        case "boolean":{
+                            metadata += "6";
+                            break;
+                        }
+                    }
+                    metadata += "|";
                 }
+                raf.writeChars(metadata + "\n");
+                
+                
+                //Writing registers
+                for (int i = 0; i < registers.size(); i++) {
+                    raf.write('#');
+                    String register = "";
+                    for (int j = 0; j < registers.get(0).getFields().size(); j++) {
+                        register += registers.get(i).getFields().get(j) + "|";
+                    }
+                    raf.writeChars(register);
+                }
+                
+                raf.close();
             } catch (IOException e) {
                 System.out.println("Hubo un error en la escritura.");
             }
@@ -142,13 +191,55 @@ public class Util {
     }
 
     public void loadFileTxt() {
-        FileReader fr;
         RandomAccessFile raf;
         registers = new ArrayList();
         try {
-            fr = new FileReader(file);
             raf = new RandomAccessFile(file, "r");
             
+            //Loading metadata
+            ArrayList<Field> fieldName = new ArrayList();
+            String metadata[] = raf.readLine().split("|");
+            for (int i = 0; i < metadata.length; i++) {
+                String type = metadata[i].substring(metadata.length - 1);
+                switch(type){
+                    case "1":{
+                        type = "int";
+                        break;
+                    }
+                    
+                    case "2":{
+                        type = "string";
+                        break;
+                    }
+                    case "3":{
+                        type = "double";
+                        break;
+                    }
+                    
+                    case "4":{
+                        type = "float";
+                        break;
+                    }
+                    
+                    case "5":{
+                        type = "byte";
+                        break;
+                    }
+                    
+                    case "6":{
+                        type = "boolean";
+                        break;
+                    }
+                }
+                
+                fieldName.add(new Field(metadata[i].substring(0, metadata[i].length() - 1), type));
+            
+            }
+            //Loading registers
+            String regs[] = raf.readLine().split("#");
+            for (int j = 0; j < regs.length; j++) {
+
+            }
             
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Error al abrir el archivo.");
