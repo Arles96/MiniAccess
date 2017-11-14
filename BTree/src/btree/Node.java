@@ -13,8 +13,6 @@ public class Node {
 
     int ID;
     String Position;
-    Page Left;
-    Page Right;
 
     public Node() {
     }
@@ -26,6 +24,11 @@ public class Node {
     public Node(int ID, String Position) {
         this.ID = ID;
         this.Position = Position;
+    }
+
+    @Override
+    public String toString() {
+        return "|ID=" + ID + " P=" + Position + "|";
     }
 
 }

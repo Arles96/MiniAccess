@@ -6,6 +6,7 @@
 package btree;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -13,10 +14,30 @@ import java.util.ArrayList;
  */
 public class BTree {
 
-    ArrayList<Node> Nodes = new ArrayList();
-    ArrayList<Page> Pages = new ArrayList();
+    private int Grade;
 
-    public BTree() {
+    private Page Root;
+    private ArrayList<Node> Nodes = new ArrayList();
+    private ArrayList<Page> Pages = new ArrayList();
+
+    public BTree(int Grade) {
+        this.Grade = Grade;
+    }
+
+    public int getGrade() {
+        return Grade;
+    }
+
+    public void setGrade(int Grade) {
+        this.Grade = Grade;
+    }
+
+    public Page getRoot() {
+        return Root;
+    }
+
+    public void setRoot(Page Root) {
+        this.Root = Root;
     }
 
     public ArrayList<Node> getNodes() {
@@ -35,8 +56,22 @@ public class BTree {
         this.Pages = Pages;
     }
 
-    public static void printTree(Page Root) {
+    public void addPage(Page newPage) {
+        Pages.add(newPage);
+    }
 
+    public void insert(Node node){
+        
+    }
+    
+    public static void printTree(Page root, int nivel) {
+        for (int i = 0; i < nivel; i++) {
+            System.out.print("---");
+        }
+        System.out.println(root);
+        for (int i = 0; i < root.getPageSize(); i++) {
+            printTree(root.getPages()[i], nivel + 1);
+        }
     }
 
 }

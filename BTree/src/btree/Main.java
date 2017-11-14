@@ -5,6 +5,8 @@
  */
 package btree;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author jorge
@@ -17,8 +19,19 @@ public class Main {
     public static void main(String[] args) {
 
     }
-
-    public static void printTree(Page Root) {
-        
-    }
+//        BTree b = new BTree(3);
+//        ArrayList<Page> pages = new ArrayList();
+//        for (int i = 0; i < 5; i++) {
+//            Node[] nodos = new Node[b.getGrade() - 1];
+//            for (int j = 0; j < b.getGrade() - 1; j++) {
+//                nodos[j] = new Node(i * nodos.length + j);
+//            }
+//            pages.add(new Page(b.getGrade(), nodos));
+//        }
+//        pages.get(0).addPage(pages.get(1));
+//        pages.get(0).addPage(pages.get(2));
+//        pages.get(2).addPage(pages.get(3));
+//        pages.get(2).addPage(pages.get(4));
+//        b.setPages(pages);
+//        b.printTree(pages.get(0), 0);
 }
