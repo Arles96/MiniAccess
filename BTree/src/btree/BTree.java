@@ -21,6 +21,7 @@ public class BTree {
     private ArrayList<Page> Pages = new ArrayList();
 
     public BTree(int Grade) {
+        Root = new Page(Grade);
         this.Grade = Grade;
     }
 
@@ -60,10 +61,13 @@ public class BTree {
         Pages.add(newPage);
     }
 
-    public void insert(Node node){
-        
+    public void insert(Node node) {
+        if (Root.getPageSize()==0) {
+            
+        }
+
     }
-    
+
     public static void printTree(Page root, int nivel) {
         for (int i = 0; i < nivel; i++) {
             System.out.print("---");
