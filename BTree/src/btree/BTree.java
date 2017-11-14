@@ -65,7 +65,6 @@ public class BTree {
         if (Root.getPageSize()==0) {
             
         }
-
     }
 
     public static void printTree(Page root, int nivel) {

@@ -12,14 +12,14 @@ package miniaccesseddii;
 public class Presentation extends javax.swing.JFrame {
 
     private PresentationThread thread;
-    private float i=50, j=1;
-    
+    private float i = 50, j = 1;
+
     public Presentation() {
         initComponents();
         configuration();
     }
-    
-    private void configuration(){
+
+    private void configuration() {
         this.setLocationRelativeTo(null);
         thread = new PresentationThread(progress);
         thread.start();
@@ -43,49 +43,39 @@ public class Presentation extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.setLayout(new javax.swing.OverlayLayout(jPanel1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("ESTRUCTURA DE DATOS II");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 460, 30));
+        jPanel1.add(jLabel2);
 
         progress.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 progressStateChanged(evt);
             }
         });
-        jPanel1.add(progress, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 174, 440, 20));
+        jPanel1.add(progress);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/miniaccesseddii/img/computer-2653375_640.png"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 11, 660, 460));
+        jPanel1.add(jLabel1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void progressStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_progressStateChanged
-        if (progress.getValue()==i) {
-            if (j!=101) {
-                this.setOpacity((100-j)/100);
+        if (progress.getValue() == i) {
+            if (j != 101) {
+                this.setOpacity((100 - j) / 100);
                 i++;
-                j+=2;
+                j += 2;
             }
         }
-        if (progress.getValue()==100) {
+        if (progress.getValue() == 100) {
             Main main = new Main();
             main.setVisible(true);
             this.dispose();
@@ -112,7 +102,7 @@ public class Presentation extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Presentation.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         //</editor-fold>
 
         /* Create and display the form */
