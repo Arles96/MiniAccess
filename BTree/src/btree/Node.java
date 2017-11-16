@@ -11,8 +11,8 @@ package btree;
  */
 public class Node {
 
-    int ID;
-    String Position;
+    private int ID;
+    private String Position;
 
     public Node() {
     }
@@ -23,6 +23,22 @@ public class Node {
 
     public Node(int ID, String Position) {
         this.ID = ID;
+        this.Position = Position;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public String getPosition() {
+        return Position;
+    }
+
+    public void setPosition(String Position) {
         this.Position = Position;
     }
 

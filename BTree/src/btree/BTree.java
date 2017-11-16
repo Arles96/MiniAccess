@@ -7,6 +7,7 @@ package btree;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 /**
  *
@@ -62,9 +63,49 @@ public class BTree {
     }
 
     public void insert(Node node) {
-        if (Root.getPageSize()==0) {
-            
+        if (Root.getNodeSize() == 0) {
+            Root.addNode(node);
+        } else {
+            recursiveInsert(Root, node);
         }
+    }
+
+    private Page recursiveInsert(Page page, Node node) {
+        Page downNode = null;
+        Page upNode = null;
+        boolean left = false;//En caso de que no encuentre el ID que sea menor a uno de los nodos de la página.
+        //Busca por los nodos del árbol para encontrar a qué lugar pertenece el nodo a insertar.
+        for (int i = 0; i < page.getNodeSize(); i++) {
+            if (node.getID() > page.getNodes()[i].getID()) {
+                if (page.getPageSize() == 0) {
+                    page.addNode(node);
+                } else {
+                    downNode = recursiveInsert(page.getPages()[i], node);
+                }
+                left = true;
+                break;
+            }
+        }
+        //En caso de que no encuentre el ID
+        //que sea menor a uno de los nodos de la página.
+        if (!left) {
+            if (page.getPageSize() == 0) {
+                page.addNode(node);
+            } else {
+                downNode = recursiveInsert(page.getPages()[page.getPageSize()], node);
+            }
+        }
+        //Agregar el nodo de la página
+        if (downNode != null) {
+            page.addNode(downNode.getNodes()[0]);
+            page.getPages()[page.getPageSize() - 1] = downNode.getPages()[0];
+            page.getPages()[page.getPageSize()] = downNode.getPages()[1];
+        }
+        //Ordenar la página en caso de que se pase
+        if (page.getNodeSize() == Grade) {
+
+        }
+        return upNode;
     }
 
     public static void printTree(Page root, int nivel) {

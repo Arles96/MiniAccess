@@ -20,7 +20,7 @@ public class Page {
     private int pageSize;
 
     public Page(int m) {
-        Pages = new Page[m];
+        Pages = new Page[m+1];
         Nodes = new Node[m];
         this.nodeSize = 0;
         this.pageSize = 0;
