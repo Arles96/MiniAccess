@@ -18,7 +18,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Main extends javax.swing.JFrame {
 
-    
     //Atributes
     
     private final Util util = new Util();
@@ -244,6 +243,11 @@ public class Main extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        principal_table.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                principal_tableKeyReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(principal_table);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -365,9 +369,10 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNuevoActionPerformed
-        Nuevo.setVisible(true);
-        Nuevo.setLocationRelativeTo(null);
+        Nuevo.setModal(true);
         Nuevo.pack();
+        Nuevo.setLocationRelativeTo(this);
+        Nuevo.setVisible(true);
     }//GEN-LAST:event_jMenuItemNuevoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -397,6 +402,10 @@ public class Main extends javax.swing.JFrame {
     private void jMenuItemGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGuardarActionPerformed
         saveFile();
     }//GEN-LAST:event_jMenuItemGuardarActionPerformed
+
+    private void principal_tableKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_principal_tableKeyReleased
+        
+    }//GEN-LAST:event_principal_tableKeyReleased
 
     /**
      * @param args the command line arguments
