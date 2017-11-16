@@ -45,7 +45,7 @@ public class Register implements Serializable {
         String txt = "";
         
         for (Field field : fields) {
-            txt += "|" + field.getContent().trim();
+            txt += field.getContent().trim();
         }
         
         txt = ((char)txt.length()) + txt;
