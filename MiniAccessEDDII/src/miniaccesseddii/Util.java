@@ -14,7 +14,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.JOptionPane;
+import sun.rmi.log.ReliableLog;
 
 /**
  *
@@ -34,6 +36,11 @@ public class Util {
     
     public Util() {
         registers = new ArrayList();
+    }
+
+    public Util(File file) {
+        registers = new ArrayList();
+        this.file = file;
     }
 
     public ArrayList<Register> getRegister() {
@@ -113,6 +120,10 @@ public class Util {
     public void exportXml() {
 
     }
+    
+    public void deleteFile(){
+        file.delete();
+    }
 
     public void saveFile() {
         if (file != null) {
@@ -161,7 +172,7 @@ public class Util {
     public void saveFileTxt() {
         if (file != null || !file.exists() || !registers.isEmpty()) {
             try {
-                RandomAccessFile raf = new RandomAccessFile(file, "w");
+                RandomAccessFile raf = new RandomAccessFile(file, "rw");
                 //Writing metadata
                 
                 String metadata = "";
@@ -201,17 +212,18 @@ public class Util {
                     }
                     metadata += "|";
                 }
-                raf.writeChars(metadata + "\n");
-                
+                raf.writeBytes(metadata + "\r\n");
+                //System.out.println("Metadata:" + metadata);
                 
                 //Writing registers
                 for (int i = 0; i < registers.size(); i++) {
                     raf.write('#');
                     String register = "";
                     for (int j = 0; j < registers.get(0).getFields().size(); j++) {
-                        register += registers.get(i).getFields().get(j) + "|";
+                        register += registers.get(i).getFields().get(j).getContent() + "|";
                     }
-                    raf.writeChars(register);
+                    //System.out.println("register: " + register);
+                    raf.writeBytes(register);
                 }
                 
                 raf.close();
@@ -221,6 +233,31 @@ public class Util {
         }
     }
 
+    
+    public String[] split(String s, char delim){
+        int c = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if(s.charAt(i) == delim){
+                c++;
+            }
+        }
+        
+        String[] parts = new String[c];
+        int cParts = 0;
+        String tempS = "";
+        for (int i = 0; i < s.length(); i++) {
+            if(s.charAt(i) != delim)
+                tempS += s.charAt(i);
+            else{
+                parts[cParts] = tempS;
+                tempS = "";
+                cParts++;
+            }
+        }
+        
+        return parts;
+    }
+    
     public void loadFileTxt() {
         RandomAccessFile raf;
         registers = new ArrayList();
@@ -228,10 +265,11 @@ public class Util {
             raf = new RandomAccessFile(file, "r");
             
             //Loading metadata
-            ArrayList<Field> fieldName = new ArrayList();
-            String metadata[] = raf.readLine().split("|");
+            ArrayList<Field> fields = new ArrayList();
+            String metadata[] = split(raf.readLine(), '|');
+            System.out.println(Arrays.toString(metadata));
             for (int i = 0; i < metadata.length; i++) {
-                String type = metadata[i].substring(metadata.length - 1);
+                String type = metadata[i].substring(metadata[i].length() - 1);
                 switch(type){
                     case "1":{
                         type = "int";
@@ -263,15 +301,24 @@ public class Util {
                     }
                 }
                 
-                fieldName.add(new Field(metadata[i].substring(0, metadata[i].length() - 1), type));
-            
+                fields.add(new Field(metadata[i].substring(0, metadata[i].length() - 1), type));
             }
+            
+            //System.out.println(fields);
+            
             //Loading registers
             String regs[] = raf.readLine().split("#");
-            for (int j = 0; j < regs.length; j++) {
-
+            for (int i = 0; i < regs.length; i++) {
+                String fieldsC[] = split(regs[i], '|');
+                registers.add(new Register());
+                Register lastReg = registers.get(registers.size() - 1);
+                for (int j = 0; j < fieldsC.length; j++) {
+                    Field fN = fields.get(i);
+                    lastReg.addField(new Field(fN.isKey(), fN.getName(), fieldsC[j], fN.getType()));
+                }
+                //System.out.println(lastReg);
             }
-            
+            raf.close();
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Error al abrir el archivo.");
         }
