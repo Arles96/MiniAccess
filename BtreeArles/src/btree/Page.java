@@ -188,7 +188,7 @@ public class Page {
     }
     
     public void setPage(int i, Page p){
-        if (i>0 && i<counterPage) {
+        if (i>=0 && i<counterPage) {
            pages[i] = p;
         }
     }

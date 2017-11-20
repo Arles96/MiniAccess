@@ -41,7 +41,7 @@ public class Btree {
     }
     
     public static void testBtree(){
-        Scanner read = new Scanner(System.in);
+        /*Scanner read = new Scanner(System.in);
         TreeB tree = new TreeB(5);
         String answer = "s";
         while (answer.equalsIgnoreCase("s")){
@@ -61,7 +61,26 @@ public class Btree {
             }
             System.out.print("Desea continuar [s/n]: ");
             answer = read.next();
-        }
+        }*/
+        TreeB tree = new TreeB(5);
+        tree.add(5);
+        tree.add(4);
+        tree.add(1);
+        tree.add(6);
+        tree.add(7);
+        tree.add(8);
+        tree.add(15);
+        tree.add(12);
+        tree.add(20);
+        tree.add(25);
+        tree.add(30);
+        tree.add(31);
+        tree.add(40);
+        tree.add(50);
+        tree.add(45);
+        tree.add(35);
+        tree.add(51);
+        tree.print();
     }
     
 }

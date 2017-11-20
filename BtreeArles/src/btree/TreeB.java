@@ -83,20 +83,28 @@ public class TreeB {
     
     private void splitFather(Page r, int key){
         //TODO: Error de Nullpointer Exception al momento de ingresar 7 numeros
+        //System.out.println(r.getFather().getNode(0).getKey());
         if (r.getFather().isFull()) {
             splitFather(r.getFather(), key);
         }else {
+            //Realizando el split
             Node [] nodeLeft = r.splitNodeLeft();
             Node [] nodeRight = r.splitNodeRight();
             Node center = r.center();
+            //Agregando el centro a la pagina padre
             r.getFather().addNode(center);
+            // Haciendo nuevas paginas hijas
             Page pageLeft = new Page(grade);
             Page pageRight = new Page(grade);
+            //Agregando el arreglo de los nodos
             pageLeft.setNodes(nodeLeft);
             pageRight.setNodes(nodeRight);
-            r.getFather().setPage(key, pageLeft);
+            //Asignando los padres a las paginas hijas
+            pageRight.setFather(r.getFather());
+            pageLeft.setFather(r.getFather());
+            r.getFather().setPage(r.getFather().getCounterPage()-1, pageLeft);
             r.getFather().addPage(pageRight);
-            addKey(r, key);
+            addKey(r.getFather(), key);
         }
     }
     
@@ -117,20 +125,13 @@ public class TreeB {
             root.addNode(new Node(key));
         }else{
             if (root.isFull()) {
-                //TODO: Error en este codigo
                 Node [] left = root.splitNodeLeft();
                 Node [] right = root.splitNodeRight();
-                for (int i = 0; i < right.length; i++) {
-                    if (right[i]!=null) {
-                        System.out.println(right[i].getKey());
-                    }
-                }
                 Node center = root.center();
                 root = null;
                 root = new Page(grade);
                 Page pageRight = new Page(grade);
                 pageRight.setNodes(right);
-                //pageRight.print();
                 Page pageLeft = new Page(grade);
                 pageLeft.setNodes(left);
                 root.addNode(center);
@@ -150,7 +151,9 @@ public class TreeB {
     }
 
     public void print(){
-        print(root);
+        if (root !=null) {
+            print(root);
+        }        
     }
 
 }
