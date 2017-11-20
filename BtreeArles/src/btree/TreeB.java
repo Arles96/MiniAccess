@@ -125,21 +125,25 @@ public class TreeB {
             root.addNode(new Node(key));
         }else{
             if (root.isFull()) {
-                Node [] left = root.splitNodeLeft();
-                Node [] right = root.splitNodeRight();
-                Node center = root.center();
-                root = null;
-                root = new Page(grade);
-                Page pageRight = new Page(grade);
-                pageRight.setNodes(right);
-                Page pageLeft = new Page(grade);
-                pageLeft.setNodes(left);
-                root.addNode(center);
-                root.addPage(pageLeft);
-                root.addPage(pageRight);
-                pageLeft.setFather(root);
-                pageRight.setFather(root);
-                addKey(root, key);
+                if (root.isFather()) {
+                    addKey(root, key);
+                }else {
+                    Node [] left = root.splitNodeLeft();
+                    Node [] right = root.splitNodeRight();
+                    Node center = root.center();
+                    root = null;
+                    root = new Page(grade);
+                    Page pageRight = new Page(grade);
+                    pageRight.setNodes(right);
+                    Page pageLeft = new Page(grade);
+                    pageLeft.setNodes(left);
+                    root.addNode(center);
+                    root.addPage(pageLeft);
+                    root.addPage(pageRight);
+                    pageLeft.setFather(root);
+                    pageRight.setFather(root);
+                    addKey(root, key);
+                }
             }else {
                 if (root.isFather()) {
                     addKey(root, key);

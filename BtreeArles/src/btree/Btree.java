@@ -62,12 +62,12 @@ public class Btree {
             System.out.print("Desea continuar [s/n]: ");
             answer = read.next();
         }*/
-        TreeB tree = new TreeB(4);
+        TreeB tree = new TreeB(5);
         tree.add(5);
         tree.add(4);
         tree.add(1);
         tree.add(6);
-        /*tree.add(7);
+        tree.add(7);
         tree.add(8);
         tree.add(15);
         tree.add(12);
@@ -79,7 +79,7 @@ public class Btree {
         tree.add(50);
         tree.add(45);
         tree.add(35);
-        tree.add(51);*/
+        tree.add(51);
         tree.print();
     }
     
