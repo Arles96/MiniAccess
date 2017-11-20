@@ -41,6 +41,7 @@ public class Pagina {
 
     public void addNodo(Nodo nodo) {
         Nodos.add(nodo);
+	sortNodos();
     }
 
     public void addPagina(Pagina pagina) {
@@ -49,9 +50,17 @@ public class Pagina {
 
     private void sortNodos() {
         for (int i = 0; i < Nodos.size(); i++) {
+            int menor = (int) Double.POSITIVE_INFINITY;
+            int pos = 0;
             for (int j = i; j < Nodos.size(); j++) {
-
+                if (Nodos.get(j).getID() < menor) {
+                    menor = Nodos.get(j).getID();
+                    pos = j;
+                }
             }
+            Nodo aux = Nodos.get(i);
+            Nodos.set(i, Nodos.get(pos));
+            Nodos.set(pos, aux);
         }
     }
 
