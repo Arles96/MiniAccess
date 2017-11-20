@@ -28,3 +28,5 @@ hs_err_pid*
 /MiniAccessEDDII/build/
 /BTree/build/
 /BtreeArles/build/
+/ArbolB/nbproject/private/
+/ArbolB/build/
