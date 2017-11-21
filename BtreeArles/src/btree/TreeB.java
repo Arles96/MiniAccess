@@ -73,16 +73,14 @@ public class TreeB {
                 }
             }
         }else {
+            r.addNode(new Node(key));
             if (r.isFull()) {
                 splitFather(r, key);
-            }else {
-                r.addNode(new Node(key));
             }
         }
     }
     
     private void splitFather(Page r, int key){
-        //TODO: Error de Nullpointer Exception al momento de ingresar 7 numeros
         //System.out.println(r.getFather().getNode(0).getKey());
         if (r.getFather().isFull()) {
             splitFather(r.getFather(), key);
@@ -104,7 +102,7 @@ public class TreeB {
             pageLeft.setFather(r.getFather());
             r.getFather().setPage(r.getFather().getCounterPage()-1, pageLeft);
             r.getFather().addPage(pageRight);
-            addKey(r.getFather(), key);
+            //addKey(r.getFather(), key);
         }
     }
     
@@ -119,14 +117,18 @@ public class TreeB {
     
     //Administation methods
     
-    public void add(int key){
+    /*public void add(int key){
         if (root==null) {
             root = new Page(grade);
             root.addNode(new Node(key));
         }else{
             if (root.isFull()) {
                 if (root.isFather()) {
-                    addKey(root, key);
+                    /*Node [] left = root.splitNodeLeft();
+                    Node [] right = root.splitNodeRight();
+                    Node center = root.center();
+                    counter++;
+                    System.out.println(counter);
                 }else {
                     Node [] left = root.splitNodeLeft();
                     Node [] right = root.splitNodeRight();
@@ -151,6 +153,65 @@ public class TreeB {
                     root.addNode(new Node(key));
                 }
             }
+        }
+    }*/
+    
+    public void add(int key){
+        if (root==null) {
+            root = new Page(grade);
+            root.addNode(new Node(key));
+            root.setRoot(true);
+        }else {
+            if (!root.isFather()) {
+                root.addNode(new Node(key));
+                if (root.isFull()) {
+                    Node [] left = root.splitNodeLeft();
+                    Node [] right = root.splitNodeRight();
+                    Node center = root.center();
+                    root = null;
+                    root = new Page(grade);
+                    root.setRoot(true);
+                    Page pageRight = new Page(grade);
+                    pageRight.setNodes(right);
+                    Page pageLeft = new Page(grade);
+                    pageLeft.setNodes(left);
+                    root.addNode(center);
+                    root.addPage(pageLeft);
+                    root.addPage(pageRight);
+                    pageLeft.setFather(root);
+                    pageRight.setFather(root);
+                    //addKey(root, key);
+                }
+            }else {
+                addKey(root, key);
+                if (root.isFull()) {
+                    //Hacemos el split con los nodos del hijo del root
+                    Node [] nodeLeft = root.splitNodeLeft();
+                    Node [] nodeRight = root.splitNodeRight();
+                    Node center = root.center();
+                    //Dividimos las paginas nietas
+                    Page [] pagesLeft = root.splitPageLeft();
+                    Page [] pagesRight = root.splitPageRight();
+                    //Hacemos una nueva raiz
+                    root = null;                    
+                    root = new Page(grade);
+                    //Promovemos el nodo
+                    root.addNode(center);
+                    //Creamos las nuevas paginas hijas de la raiz
+                    Page pageLeft = new Page(grade);
+                    Page pageRight = new Page(grade);
+                    //Le agregamos las nuevas paginas a la raiz
+                    root.addPage(pageLeft);
+                    root.addPage(pageRight);
+                    //Le agregamos los nodos a las paginas nuevas
+                    pageLeft.setNodes(nodeLeft);
+                    pageRight.setNodes(nodeRight);
+                    //Le agregamos a las nuevas paginas las paginas nietas
+                    pageLeft.setPages(pagesLeft);
+                    pageRight.setPages(pagesRight);
+                }
+            }
+            
         }
     }
 

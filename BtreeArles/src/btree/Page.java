@@ -19,13 +19,17 @@ public class Page {
     private int counterNode = 0;
     private int counterPage = 0;
     private Page pages [];
+    private boolean root;
+    private int sizePage;
+    
     
     //Constructor
 
     public Page(int size) {
         this.size = size;
-        nodes = new Node [this.size-1];
-        pages = new Page[this.size];
+        this.sizePage = this.size+1;
+        nodes = new Node [this.size];
+        pages = new Page[this.sizePage];
     }
     
     //Getter eand setter
@@ -67,6 +71,12 @@ public class Page {
 
     public void setPages(Page[] pages) {
         this.pages = pages;
+        counterPage = 0;
+        for (int i = 0; i < this.pages.length; i++) {
+            if (pages[i]!=null) {
+                counterPage++;
+            }
+        }
     }
 
     public Page getFather() {
@@ -83,6 +93,14 @@ public class Page {
 
     public void setCounterPage(int counterPage) {
         this.counterPage = counterPage;
+    }
+
+    public boolean isRoot() {
+        return root;
+    }
+
+    public void setRoot(boolean root) {
+        this.root = root;
     }
     
     //private methods
@@ -103,8 +121,9 @@ public class Page {
     //Admisnitracion methods
     
     public void addNode(Node node){
-        if (counterNode < size-1) {
+        if (counterNode < size) {
             nodes[counterNode] = node;
+            //System.out.println(nodes[counterNode].getKey());
             counterNode++;
             if (counterNode>1) {
                 BubbleSort();
@@ -113,7 +132,7 @@ public class Page {
     }
     
     public boolean isFull(){
-        return counterNode==size-1;
+        return counterNode==size;
     }
     
     public boolean isFather(){
@@ -121,7 +140,7 @@ public class Page {
     }
     
     public Node[] splitNodeLeft(){
-        Node [] nodeLeft = new Node[size-1];
+        Node [] nodeLeft = new Node[size];
         if (size%2==1) {
             int length = (this.size-1)/2;
             for (int i = 0; i < length; i++) {
@@ -136,11 +155,11 @@ public class Page {
     }
     
     public Node[] splitNodeRight(){
-        Node [] nodesRight = new Node[this.size-1];
+        Node [] nodesRight = new Node[this.size];
         if (size%2==1) {
             int begin = (this.size/2)+2;
             int counter = 0;
-            for (int i = begin-1 ; i < this.size-1; i++) {
+            for (int i = begin-1 ; i < this.size; i++) {
                 //System.out.println(nodes[i].getKey());
                 nodesRight[counter] = nodes[i];
                 counter++;
@@ -165,7 +184,7 @@ public class Page {
     }
     
     public void addPage (Page page){
-        if (counterPage<size) {
+        if (counterPage<sizePage) {
             pages[counterPage] = page;
             counterPage++;
         }
@@ -201,6 +220,32 @@ public class Page {
             //}
         }
         System.out.println("");
+    }
+    
+    public Page[] splitPageLeft(){
+        Page [] left = new Page[this.sizePage];
+        if (size%2==1) {
+            int length = this.sizePage/2;
+            for (int i = 0; i < length; i++) {
+                left[i] = pages[i];
+            }
+        }else {
+            
+        }   
+        return left;
+    }
+    
+    public Page[] splitPageRight(){
+        Page [] right = new Page[this.sizePage];
+        if (size%2==1) {
+            int begin = this.sizePage/2;
+            int counter = 0;
+            for (int i = begin; i < sizePage; i++) {
+                right[counter] = pages[i];
+                counter++;
+            }
+        }
+        return right;
     }
     
 }
