@@ -102,6 +102,9 @@ public class TreeB {
             pageLeft.setFather(r.getFather());
             r.getFather().setPage(r.getFather().getCounterPage()-1, pageLeft);
             r.getFather().addPage(pageRight);
+           /* if (r.getFather().getFather().isFull()) {
+                splitFather(r.getFather().getFather(), key);
+            }*/
             //addKey(r.getFather(), key);
         }
     }
@@ -165,19 +168,25 @@ public class TreeB {
             if (!root.isFather()) {
                 root.addNode(new Node(key));
                 if (root.isFull()) {
+                    //Hacemos el split con los nodos
                     Node [] left = root.splitNodeLeft();
                     Node [] right = root.splitNodeRight();
                     Node center = root.center();
+                    //Creamos un nuevo root
                     root = null;
                     root = new Page(grade);
+                    //le decimos que es la raiz
                     root.setRoot(true);
+                    //Creamos las nuevas paginas y le agregamos los split
                     Page pageRight = new Page(grade);
                     pageRight.setNodes(right);
                     Page pageLeft = new Page(grade);
                     pageLeft.setNodes(left);
+                    //Le agregamos a la raiz el nodo primovido y las nuevas paginas
                     root.addNode(center);
                     root.addPage(pageLeft);
                     root.addPage(pageRight);
+                    //Le seteamos a las nuevas paginas el nuevo padre
                     pageLeft.setFather(root);
                     pageRight.setFather(root);
                     //addKey(root, key);
@@ -209,6 +218,9 @@ public class TreeB {
                     //Le agregamos a las nuevas paginas las paginas nietas
                     pageLeft.setPages(pagesLeft);
                     pageRight.setPages(pagesRight);
+                    //Asignando los padres
+                    pageLeft.setFather(root);
+                    pageRight.setFather(root);
                 }
             }
             

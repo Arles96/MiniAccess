@@ -74,6 +74,7 @@ public class Page {
         counterPage = 0;
         for (int i = 0; i < this.pages.length; i++) {
             if (pages[i]!=null) {
+                pages[i].setFather(this);
                 counterPage++;
             }
         }
@@ -165,8 +166,12 @@ public class Page {
                 counter++;
             }
         }else{
-            int length = (this.size/2)+1;
-            System.arraycopy(nodes, length-1, nodesRight, 0, length);
+            int begin = (this.size/2);
+            int counter = 0;
+            for (int i = begin; i < this.size; i++) {
+                nodesRight[counter] = nodes[i];
+                counter++;
+            }
         }
         return nodesRight;
     }
@@ -230,7 +235,10 @@ public class Page {
                 left[i] = pages[i];
             }
         }else {
-            
+            int lenght = (this.sizePage-1)/2;
+            for (int i = 0; i < lenght; i++) {
+                left[i] = pages[i];
+            }
         }   
         return left;
     }
@@ -239,6 +247,13 @@ public class Page {
         Page [] right = new Page[this.sizePage];
         if (size%2==1) {
             int begin = this.sizePage/2;
+            int counter = 0;
+            for (int i = begin; i < sizePage; i++) {
+                right[counter] = pages[i];
+                counter++;
+            }
+        }else {
+            int begin = (this.sizePage-1)/2;
             int counter = 0;
             for (int i = begin; i < sizePage; i++) {
                 right[counter] = pages[i];

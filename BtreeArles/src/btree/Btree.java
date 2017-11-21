@@ -63,23 +63,26 @@ public class Btree {
             answer = read.next();
         }*/
         TreeB tree = new TreeB(5);
-        tree.add(5);
-        tree.add(4);
-        tree.add(1);
-        tree.add(6);
-        tree.add(7);
-        tree.add(8);
-        tree.add(15);
-        tree.add(12);
-        tree.add(20);
-        tree.add(25);
-        tree.add(30);
-        tree.add(31);
-        tree.add(40);
-        tree.add(50);
-        tree.add(45);
-        tree.add(35);
-        tree.add(51);
+//        tree.add(5);
+//        tree.add(4);
+//        tree.add(1);
+//        tree.add(6);
+//        tree.add(7);
+//        tree.add(8);
+//        tree.add(15);
+//        tree.add(12);
+//        tree.add(20);
+//        tree.add(25);
+////        tree.add(30);
+////        tree.add(31);
+////        tree.add(40);
+////        tree.add(50);
+////        tree.add(45);
+////        tree.add(35);
+////        tree.add(51);
+        for (int i = 1; i <= 20; i++) {
+            tree.add(i);
+        }
         tree.print();
     }
     
