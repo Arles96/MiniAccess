@@ -227,6 +227,15 @@ public class Page {
         System.out.println("");
     }
     
+    public String toString(){
+        String line = "{";
+        for (int i = 0; i < counterNode; i++) {
+            line += nodes[i].getKey() + ",";
+        }
+        line += "}";
+        return line;
+    }
+    
     public Page[] splitPageLeft(){
         Page [] left = new Page[this.sizePage];
         if (size%2==1) {

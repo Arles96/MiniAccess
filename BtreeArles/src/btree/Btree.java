@@ -73,17 +73,17 @@ public class Btree {
 //        tree.add(12);
 //        tree.add(20);
 //        tree.add(25);
-////        tree.add(30);
-////        tree.add(31);
-////        tree.add(40);
-////        tree.add(50);
-////        tree.add(45);
-////        tree.add(35);
-////        tree.add(51);
+//        tree.add(30);
+//        tree.add(31);
+//        tree.add(40);
+//        tree.add(50);
+//        tree.add(45);
+//        tree.add(35);
+//        tree.add(51);
         for (int i = 1; i <= 20; i++) {
             tree.add(i);
         }
-        tree.print();
+        tree.print2();
     }
     
 }

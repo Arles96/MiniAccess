@@ -75,37 +75,65 @@ public class TreeB {
         }else {
             r.addNode(new Node(key));
             if (r.isFull()) {
-                splitFather(r, key);
+                splitFather(r);
             }
         }
     }
     
-    private void splitFather(Page r, int key){
+    private void splitFather(Page r){
         //System.out.println(r.getFather().getNode(0).getKey());
         if (r.getFather().isFull()) {
-            splitFather(r.getFather(), key);
+            splitFather(r.getFather());
         }else {
-            //Realizando el split
-            Node [] nodeLeft = r.splitNodeLeft();
-            Node [] nodeRight = r.splitNodeRight();
-            Node center = r.center();
-            //Agregando el centro a la pagina padre
-            r.getFather().addNode(center);
-            // Haciendo nuevas paginas hijas
-            Page pageLeft = new Page(grade);
-            Page pageRight = new Page(grade);
-            //Agregando el arreglo de los nodos
-            pageLeft.setNodes(nodeLeft);
-            pageRight.setNodes(nodeRight);
-            //Asignando los padres a las paginas hijas
-            pageRight.setFather(r.getFather());
-            pageLeft.setFather(r.getFather());
-            r.getFather().setPage(r.getFather().getCounterPage()-1, pageLeft);
-            r.getFather().addPage(pageRight);
-           /* if (r.getFather().getFather().isFull()) {
-                splitFather(r.getFather().getFather(), key);
-            }*/
-            //addKey(r.getFather(), key);
+            if (!r.isFather()) {
+                //Realizando el split
+                Node [] nodeLeft = r.splitNodeLeft();
+                Node [] nodeRight = r.splitNodeRight();
+                Node center = r.center();
+                //Agregando el centro a la pagina padre
+                r.getFather().addNode(center);
+                // Haciendo nuevas paginas hijas
+                Page pageLeft = new Page(grade);
+                Page pageRight = new Page(grade);
+                //Agregando el arreglo de los nodos
+                pageLeft.setNodes(nodeLeft);
+                pageRight.setNodes(nodeRight);
+                //Asignando los padres a las paginas hijas
+                pageRight.setFather(r.getFather());
+                pageLeft.setFather(r.getFather());
+                r.getFather().setPage(r.getFather().getCounterPage()-1, pageLeft);
+                r.getFather().addPage(pageRight);
+            }else {
+                //Realizando el split
+                Node [] nodeLeft = r.splitNodeLeft();
+                Node [] nodeRight = r.splitNodeRight();
+                Node center = r.center();
+                //Diviediendo las paginas nietas
+                Page [] pagesLeft = r.splitPageLeft();
+                Page [] pagesRight = r.splitPageRight();
+                //Promovemos al nodo central
+                r.getFather().addNode(center);
+                //Creamos las nuevas paginas hijas del padre
+                Page pageLeft = new Page(grade);
+                Page pageRight = new Page(grade);
+                //Le agregamos las nuevas paginas al padre
+                r.getFather().setPage(r.getFather().getCounterPage()-1, pageLeft);
+                r.getFather().addPage(pageRight);
+                //Le agregamos los nodos a las nuevas pagina
+                pageLeft.setNodes(nodeLeft);
+                pageRight.setNodes(nodeRight);
+                //Le agregamos las hijas a las nuevas paginas
+                pageLeft.setPages(pagesLeft);
+                pageRight.setPages(pagesRight);
+                //Le seteamos los nuevos padres
+                pageLeft.setFather(r.getFather());
+                pageRight.setFather(r.getFather());
+            }
+            if (!r.getFather().isRoot()) {
+                if (r.getFather().isFull()) {
+                    splitFather(r.getFather());
+                }
+            }
         }
     }
     
@@ -118,47 +146,18 @@ public class TreeB {
         }
     }
     
-    //Administation methods
-    
-    /*public void add(int key){
-        if (root==null) {
-            root = new Page(grade);
-            root.addNode(new Node(key));
-        }else{
-            if (root.isFull()) {
-                if (root.isFather()) {
-                    /*Node [] left = root.splitNodeLeft();
-                    Node [] right = root.splitNodeRight();
-                    Node center = root.center();
-                    counter++;
-                    System.out.println(counter);
-                }else {
-                    Node [] left = root.splitNodeLeft();
-                    Node [] right = root.splitNodeRight();
-                    Node center = root.center();
-                    root = null;
-                    root = new Page(grade);
-                    Page pageRight = new Page(grade);
-                    pageRight.setNodes(right);
-                    Page pageLeft = new Page(grade);
-                    pageLeft.setNodes(left);
-                    root.addNode(center);
-                    root.addPage(pageLeft);
-                    root.addPage(pageRight);
-                    pageLeft.setFather(root);
-                    pageRight.setFather(root);
-                    addKey(root, key);
-                }
-            }else {
-                if (root.isFather()) {
-                    addKey(root, key);
-                }else {
-                    root.addNode(new Node(key));
-                }
+    public void print(String space, Page p){
+        System.out.println(space + p.toString());
+        if (p.isFather()) {
+            space += "--";
+            for (int i = 0; i < p.getCounterPage(); i++) {
+                print(space, p.getPage(i));
             }
         }
-    }*/
+    }
     
+    //Administation methods
+
     public void add(int key){
         if (root==null) {
             root = new Page(grade);
@@ -228,9 +227,13 @@ public class TreeB {
     }
 
     public void print(){
-        if (root !=null) {
+        if (root != null) {
             print(root);
         }        
+    }
+    
+    public void print2(){
+        print("", root);
     }
 
 }
